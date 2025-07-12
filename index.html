@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador para el 24 de junio 2025</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1c1c1c 0%, #2e2e2e 100%);
+        }
+
+        .contador {
+            font-size: 48px;
+            font-weight: 600;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contador:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 255, 255, 0.2);
+        }
+
+        #recuento {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ffd700;
+            animation: fadein 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes fadein {
+            0% {
+                opacity: 0.8;
+                text-shadow: 0 0 10px #ffd700;
+            }
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 20px #ffecb3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contador" id="contador">
+        <p id="recuento">Cargando...</p>
+    </div>
+
+    <script>
+        // Fecha de destino (24 de junio de 2025, 00:00:00)
+        var fechaDestino = new Date("Jul 24, 2025 00:00:00").getTime();
+
+        var x = setInterval(function() {
+            var ahora = new Date().getTime();
+            var distancia = fechaDestino - ahora;
+
+            var dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            var horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            var segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+            document.getElementById("recuento").innerHTML =
+            "Te quedan " + dias + "d " + horas + "h " + minutos + "m " + segundos + "s, para presentar tu maqueta. ¡Tú puedes, mi arqui 💛!";
+
+            if (distancia < 0) {
+                clearInterval(x);
+                document.getElementById("recuento").innerHTML = "¡Tú puedes dar lo mejor de ti!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
